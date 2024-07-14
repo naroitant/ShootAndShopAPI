@@ -1,6 +1,6 @@
 @ShootAndShopAPI_HostAddress = http://localhost:5298
 
-GET {{ShootAndShopAPI_HostAddress}}/weatherforecast/
+GET {{ShootAndShopAPI_HostAddress}}/shoot-and-shop-api/
 Accept: application/json
 
 ###

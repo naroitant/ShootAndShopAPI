@@ -1,24 +1,31 @@
-﻿namespace Domain.Entities;
+﻿namespace ShootAndShopAPI.Domain.Entities;
 
 public class ColdArm(string sku, string manufacturerNumber, string name,
-    decimal bladeLengthInInches, decimal overallLengthInInches,
-    Manufacturer manufacturer) : Product(sku, manufacturerNumber, name,
-    manufacturer)
+    Manufacturer manufacturer, Category category, double bladeLengthInInches,
+    double overallLengthInInches, Material bladeMaterial,
+    Material handleMaterial) : Product(sku, manufacturerNumber, name,
+    manufacturer, category)
 {
-    public decimal BladeLengthInInches { get; private set; } =
+    public double BladeLengthInInches { get; private set; } =
         bladeLengthInInches;
-    public decimal OverallLengthInInches { get; private set; } =
+    public double OverallLengthInInches { get; private set; } =
         overallLengthInInches;
+    public Material BladeMaterial { get; private set; } = bladeMaterial;
+    public Material HandleMaterial { get; private set; } = handleMaterial;
 
-    public void Update(string sku, string manufacturerNumber, string name,
-        int quantityInStock, decimal bladeLengthInInches,
-        decimal overallLengthInInches)
+    public void Change(string sku, string manufacturerNumber, string name,
+        Manufacturer manufacturer, Category category,
+        double bladeLengthInInches, double overallLengthInInches,
+        Material bladeMaterial, Material handleMaterial)
     {
         Sku = sku;
         ManufacturerNumber = manufacturerNumber;
         Name = name;
-        QuantityInStock = quantityInStock;
+        Manufacturer = manufacturer;
+        Category = category;
         BladeLengthInInches = bladeLengthInInches;
         OverallLengthInInches = overallLengthInInches;
+        BladeMaterial = bladeMaterial;
+        HandleMaterial = handleMaterial;
     }
 }

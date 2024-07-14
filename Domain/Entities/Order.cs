@@ -1,9 +1,9 @@
-﻿using Domain.ValueObjects;
+﻿using ShootAndShopAPI.Domain.ValueObjects;
 
-namespace Domain.Entities;
+namespace ShootAndShopAPI.Domain.Entities;
 
-public class Order(List<Product> products, DateTimeOffset createdAt)
-    : Set(products)
+public class Order(ShoppingCart shoppingCart, DateTimeOffset createdAt)
+    : Set(shoppingCart.Customer, shoppingCart.Items)
 {
     public DateTimeOffset CreatedAt { get; private set; } = createdAt;
     public OrderStatus Status { get; private set; } = OrderStatus.Active;

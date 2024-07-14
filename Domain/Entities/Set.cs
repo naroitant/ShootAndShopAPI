@@ -1,18 +1,9 @@
-﻿using Domain.Common;
+﻿using ShootAndShopAPI.Domain.Common;
 
-namespace Domain.Entities;
+namespace ShootAndShopAPI.Domain.Entities;
 
-public abstract class Set(List<Product> products) : BaseEntity
+public abstract class Set(Customer customer, List<Item> items) : BaseEntity
 {
-    public List<Product> Products { get; protected set; } = [];
-
-    protected void AddProduct(Product product)
-    {
-        products.Add(product);
-    }
-    
-    protected void Clear()
-    {
-        products.Clear();
-    }
+    public Customer Customer { get; protected init; } = customer;
+    public List<Item> Items { get; protected set; } = [];
 }

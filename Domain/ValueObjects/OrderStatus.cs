@@ -1,4 +1,4 @@
-﻿namespace Domain.ValueObjects;
+﻿namespace ShootAndShopAPI.Domain.ValueObjects;
 
 public enum OrderStatus
 {

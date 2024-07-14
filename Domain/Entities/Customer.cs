@@ -1,6 +1,6 @@
-﻿using Domain.ValueObjects;
+﻿using ShootAndShopAPI.Domain.ValueObjects;
 
-namespace Domain.Entities;
+namespace ShootAndShopAPI.Domain.Entities;
 
 public class Customer(string firstName, string middleName,
     string lastName, string phoneNumber, string emailAddress, Address address)

@@ -1,25 +1,33 @@
-﻿namespace Domain.Entities;
+﻿using ShootAndShopAPI.Domain.ValueObjects;
+
+namespace ShootAndShopAPI.Domain.Entities;
 
 public class FireArm(string sku, string manufacturerNumber, string name,
-    decimal caliber, decimal barrelLengthInInches, int capacity,
-    Manufacturer manufacturer) : Product(sku, manufacturerNumber, name,
-    manufacturer)
+    Manufacturer manufacturer, Category category, Caliber caliber,
+    ActionType actionType, double barrelLengthInInches,
+    int capacityWithoutChamber) : Product(sku, manufacturerNumber, name,
+    manufacturer, category)
 {
-    public decimal Caliber { get; private set; } = caliber;
-    public decimal BarrelLengthInInches { get; private set; } =
+    public Caliber Caliber { get; private set; } = caliber;
+    public ActionType ActionType { get; private set; } = actionType;
+    public double BarrelLengthInInches { get; private set; } =
         barrelLengthInInches;
-    public int Capacity { get; private set; } = capacity;
+    public int CapacityWithoutChamber { get; private set; } =
+        capacityWithoutChamber;
 
-    public void Update(string sku, string manufacturerNumber, string name,
-        int quantityInStock, decimal caliber,
-        decimal barrelLengthInInches, int capacity)
+    public void Change(string sku, string manufacturerNumber, string name,
+        Manufacturer manufacturer, Category category, Caliber caliber,
+        ActionType actionType, double barrelLengthInInches,
+        int capacityWithoutChamber)
     {
         Sku = sku;
         ManufacturerNumber = manufacturerNumber;
         Name = name;
-        QuantityInStock = quantityInStock;
+        Manufacturer = manufacturer;
+        Category = category;
         Caliber = caliber;
+        ActionType = actionType;
         BarrelLengthInInches = barrelLengthInInches;
-        Capacity = capacity;
+        CapacityWithoutChamber = capacityWithoutChamber;
     }
 }

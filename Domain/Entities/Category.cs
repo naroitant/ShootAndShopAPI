@@ -2,7 +2,7 @@
 
 namespace ShootAndShopAPI.Domain.Entities;
 
-public class Manufacturer(string name) : BaseEntity
+public class Category(string name) : BaseEntity
 {
     public string Name { get; private set; } = name;
 

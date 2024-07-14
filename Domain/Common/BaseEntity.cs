@@ -1,4 +1,4 @@
-﻿namespace Domain.Common;
+﻿namespace ShootAndShopAPI.Domain.Common;
 
 public abstract class BaseEntity
 {

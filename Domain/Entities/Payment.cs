@@ -1,6 +1,6 @@
-﻿using Domain.Common;
+﻿using ShootAndShopAPI.Domain.Common;
 
-namespace Domain.Entities;
+namespace ShootAndShopAPI.Domain.Entities;
 
 public class Payment(DateTimeOffset paidAt) : BaseEntity
 {
