@@ -3,18 +3,21 @@ using ShootAndShopAPI.Domain.ValueObjects;
 
 namespace ShootAndShopAPITest.Domain.Entities.UnitTests;
 
-public class CustomerTests
+public class PersonTests
 {
+    private class PersonTest(string firstName, string middleName, string lastName,
+        string phoneNumber, Address address) : Person(firstName, middleName,
+        lastName, phoneNumber, address) { }
+    
     [Fact]
-    public void ShouldChangeCustomerAddress()
+    public void ShouldChangeAddress()
     {
         // Arrange
-        var customer = new Customer(
+        var personTest = new PersonTest(
             "Jake",
             "Travis",
             "Amundsen",
             "+18002002010",
-            "j.amundsen@gmail.com",
             new Address(
                 "123 Washington Street, apt 1",
                 "New York",
@@ -29,22 +32,21 @@ public class CustomerTests
             "Moscow",
             "Russia",
             "100000");
-        customer.ChangeAddress(address);
+        personTest.ChangeAddress(address);
         
         // Assert
-        Assert.Equal(address, customer.Address);
+        Assert.Equal(address, personTest.Address);
     }
     
     [Fact]
-    public void ShouldChangeCustomerPhoneNumber()
+    public void ShouldChangePhoneNumber()
     {
         // Arrange
-        var customer = new Customer(
+        var personTest = new PersonTest(
             "Jake",
             "Travis",
             "Amundsen",
             "+18002002010",
-            "j.amundsen@gmail.com",
             new Address(
                 "123 Washington Street, apt 1",
                 "New York",
@@ -53,23 +55,22 @@ public class CustomerTests
                 "10000"));
         
         // Act
-        customer.ChangePhoneNumber(
+        personTest.ChangePhoneNumber(
             "+19004505080");
         
         // Assert
-        Assert.Equal("+19004505080", customer.PhoneNumber);
+        Assert.Equal("+19004505080", personTest.PhoneNumber);
     }
     
     [Fact]
-    public void ShouldChangeCustomerName()
+    public void ShouldChangeName()
     {
         // Arrange
-        var customer = new Customer(
+        var personTest = new PersonTest(
             "Jake",
             "Travis",
             "Amundsen",
             "+18002002010",
-            "j.amundsen@gmail.com",
             new Address(
                 "123 Washington Street, apt 1",
                 "New York",
@@ -78,10 +79,10 @@ public class CustomerTests
                 "10000"));
         
         // Act
-        customer.ChangeName("Alfred", "Gregory", "Thomson");
+        personTest.ChangeName("Alfred", "Gregory", "Thomson");
         
         // Assert
         Assert.Equal("Alfred Gregory Thomson",
-            $"{customer.FirstName} {customer.MiddleName} {customer.LastName}");
+            $"{personTest.FirstName} {personTest.MiddleName} {personTest.LastName}");
     }
 }

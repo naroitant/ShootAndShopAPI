@@ -15,7 +15,6 @@ public class ItemTests
                 "Travis",
                 "Amundsen",
                 "+18002002010",
-                "j.amundsen@gmail.com",
                 new Address(
                     "123 Washington Street, apt 1",
                     "New York",
@@ -53,7 +52,6 @@ public class ItemTests
                 "Travis",
                 "Amundsen",
                 "+18002002010",
-                "j.amundsen@gmail.com",
                 new Address(
                     "123 Washington Street, apt 1",
                     "New York",
@@ -91,7 +89,6 @@ public class ItemTests
                 "Travis",
                 "Amundsen",
                 "+18002002010",
-                "j.amundsen@gmail.com",
                 new Address(
                     "123 Washington Street, apt 1",
                     "New York",
@@ -129,7 +126,6 @@ public class ItemTests
                 "Travis",
                 "Amundsen",
                 "+18002002010",
-                "j.amundsen@gmail.com",
                 new Address(
                     "123 Washington Street, apt 1",
                     "New York",

@@ -12,10 +12,14 @@ public class Item(Product product, int quantity) : Product(
         if (ReferenceEquals(null, obj))
         {
             return false;
-        } else if (ReferenceEquals(this, obj))
+        }
+        
+        if (ReferenceEquals(this, obj))
         {
             return true;
-        } else if (obj.GetType() != this.GetType())
+        }
+        
+        if (obj.GetType() != this.GetType())
         {
             return false;
         }

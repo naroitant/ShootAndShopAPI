@@ -3,6 +3,5 @@
 namespace ShootAndShopAPI.Domain.Entities;
 
 public class Customer(string firstName, string middleName,
-    string lastName, string phoneNumber, string emailAddress, Address address)
-    : Person(firstName, middleName, lastName, phoneNumber, emailAddress,
-        address) { }
+    string lastName, string phoneNumber, Address address)
+    : Person(firstName, middleName, lastName, phoneNumber, address) { }

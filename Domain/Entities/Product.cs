@@ -10,7 +10,7 @@ public abstract class Product(string sku, string manufacturerNumber,
         manufacturerNumber;
     public string Name { get; protected set; } = name;
     public Category Category { get; protected set; } = category;
-    public int QuantityInStock { get; protected set; }
+    public int QuantityInStock { get; private set; } = 0;
     public List<ProductPrice> PriceHistory { get; protected set; } = [];
 
     public Manufacturer Manufacturer { get; protected set; } = manufacturer;
@@ -20,13 +20,20 @@ public abstract class Product(string sku, string manufacturerNumber,
         ProductPrice productPrice = new(DateTimeOffset.Now, newPriceInUsd);
     }
     
-    public void Receive(int quantitySpent)
+    public void Receive(int quantityReceived)
     {
-        QuantityInStock += quantitySpent;
+        QuantityInStock += quantityReceived;
     }
     
-    public void Spend(int quantityReceived)
+    public void Spend(int quantitySpent)
     {
-        QuantityInStock -= quantityReceived;
+        if (QuantityInStock > quantitySpent)
+        {
+            QuantityInStock -= quantitySpent;
+        }
+        else
+        {
+            throw new Exception();
+        }
     }
 }

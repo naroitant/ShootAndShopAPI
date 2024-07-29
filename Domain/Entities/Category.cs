@@ -1,13 +1,3 @@
-﻿using ShootAndShopAPI.Domain.Common;
+﻿namespace ShootAndShopAPI.Domain.Entities;
 
-namespace ShootAndShopAPI.Domain.Entities;
-
-public class Category(string name) : BaseEntity
-{
-    public string Name { get; private set; } = name;
-
-    public void Change(string name)
-    {
-        Name = name;
-    }
-}
+public class Category(string name) : Quality(name) { }
