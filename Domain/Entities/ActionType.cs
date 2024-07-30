@@ -1,3 +1,3 @@
 ﻿namespace ShootAndShopAPI.Domain.Entities;
 
-public class ActionType(string name) : Quality(name) { }
+public abstract class ActionType(string name) : Quality(name) { }

@@ -1,7 +1,13 @@
 ﻿namespace ShootAndShopAPI.Domain.Entities;
 
-public class ShoppingCart(Customer customer, List<Item> items) : Set(customer, [])
+public class ShoppingCart(
+    Customer customer,
+    List<Item> items)
+    : Set(customer, [])
 {
+    public new Customer Customer { get; private init; } = customer;
+    public int CustomerId { get; private set; }
+    
     public void AddItem(Product product)
     {
         var item = new Item(product, 1);

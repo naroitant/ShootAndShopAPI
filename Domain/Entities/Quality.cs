@@ -6,8 +6,8 @@ public abstract class Quality(string name) : BaseEntity
 {
     public string Name { get; private set; } = name;
 
-    public void Change(string name)
+    public void ChangeName(string newName)
     {
-        Name = name;
+        Name = newName;
     }
 }

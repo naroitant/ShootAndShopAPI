@@ -5,26 +5,43 @@ namespace ShootAndShopAPITest.Domain.Entities.UnitTests;
 
 public class ColdArmTests
 {
+    public class ColdArmTest(
+        string sku, 
+        string manufacturerNumber, 
+        string name,
+        Manufacturer manufacturer,
+        decimal priceInUsd,
+        double bladeLengthInInches,
+        double overallLengthInInches, 
+        Material bladeMaterial,
+        Material handleMaterial)
+        : ColdArm(
+            sku,
+            manufacturerNumber,
+            name,
+            manufacturer,
+            priceInUsd,
+            bladeLengthInInches,
+            overallLengthInInches, 
+            bladeMaterial,
+            handleMaterial) {}
+    
     [Fact]
-    public void ShouldChangeColdArm()
+    public void ShouldChangeSpecs()
     {
         // Arrange
-        var coldArm = new ColdArm("617717212178",
+        var coldArm = new ColdArmTest("617717212178",
             "1217",
             "Kabar USMC Fight 7\" 1095 CroVan Straight Leather Handle & Sheath",
             new Manufacturer("Ka-Bar"),
-            new Category("Knives"),
+            86.29m,
             7,
             12,
             new Material("Carbon Steel"),
             new Material("Stacked Leather"));
         
         // Act
-        coldArm.Change("093674804784",
-            "LBR231",
-            "Kabar USMC Fight 7\" 1095 CroVan Straight Leather Handle & Sheath",
-            new Manufacturer("Templar Knives"),
-            new Category("Knives"),
+        coldArm.ChangeSpecs(
             3.5,
             5.5,
             new Material("Black 440C Stainless Steel"),
@@ -32,12 +49,12 @@ public class ColdArmTests
         
         // Assert
         Assert.Equal(
-            JsonConvert.SerializeObject(new ColdArm(
-                "093674804784",
-                "LBR231",
+            JsonConvert.SerializeObject(new ColdArmTest(
+                "617717212178",
+                "1217",
                 "Kabar USMC Fight 7\" 1095 CroVan Straight Leather Handle & Sheath",
-                new Manufacturer("Templar Knives"),
-                new Category("Knives"),
+                new Manufacturer("Ka-Bar"),
+                86.29m,
                 3.5,
                 5.5,
                 new Material("Black 440C Stainless Steel"),

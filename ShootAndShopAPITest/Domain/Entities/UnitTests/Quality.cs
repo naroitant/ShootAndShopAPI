@@ -8,13 +8,13 @@ public class QualityTests
     private class QualityTest(string name) : Quality(name) { }
     
     [Fact]
-    public void ShouldChangeActionType()
+    public void ShouldChangeName()
     {
         // Arrange
         var qualityTest = new QualityTest("Lever");
         
         // Act
-        qualityTest.Change("Bolt");
+        qualityTest.ChangeName("Bolt");
         
         // Assert
         Assert.Equal(JsonConvert.SerializeObject(new QualityTest("Bolt")),

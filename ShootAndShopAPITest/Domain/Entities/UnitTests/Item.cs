@@ -23,14 +23,14 @@ public class ItemTests
                     "10000")),
             []);
         var item = new Item(
-            new FireArm(
+            new Rifle(
                 "736676169344",
                 "16934",
                 "Ruger American Rifle, .308 Win, 22\" Barrel, Vortex Crossfire II Scope, Mounted",
                 new Manufacturer("Ruger"),
-                new Category("Rifles"),
-                new Caliber(0.308, Unit.Inches),
-                new ActionType("Bolt"),
+                799.00m,
+                new Caliber(0.308, Units.Inches),
+                new RifleActionType("Bolt"),
                 22,
                 4),
             15);
@@ -60,14 +60,14 @@ public class ItemTests
                     "10000")),
             []);
         var item = new Item(
-            new FireArm(
+            new Rifle(
                 "736676169344",
                 "16934",
                 "Ruger American Rifle, .308 Win, 22\" Barrel, Vortex Crossfire II Scope, Mounted",
                 new Manufacturer("Ruger"),
-                new Category("Rifles"),
-                new Caliber(0.308, Unit.Inches),
-                new ActionType("Bolt"),
+                799.00m,
+                new Caliber(0.308, Units.Inches),
+                new RifleActionType("Bolt"),
                 22,
                 4),
             15);
@@ -97,14 +97,14 @@ public class ItemTests
                     "10000")),
             []);
         var item = new Item(
-            new FireArm(
+            new Rifle(
                 "736676169344",
                 "16934",
                 "Ruger American Rifle, .308 Win, 22\" Barrel, Vortex Crossfire II Scope, Mounted",
                 new Manufacturer("Ruger"),
-                new Category("Rifles"),
-                new Caliber(0.308, Unit.Inches),
-                new ActionType("Bolt"),
+                799.00m,
+                new Caliber(0.308, Units.Inches),
+                new RifleActionType("Bolt"),
                 22,
                 4),
             15);
@@ -134,14 +134,14 @@ public class ItemTests
                     "10000")),
             []);
         var item = new Item(
-            new FireArm(
+            new Rifle(
                 "736676169344",
                 "16934",
                 "Ruger American Rifle, .308 Win, 22\" Barrel, Vortex Crossfire II Scope, Mounted",
                 new Manufacturer("Ruger"),
-                new Category("Rifles"),
-                new Caliber(0.308, Unit.Inches),
-                new ActionType("Bolt"),
+                799.00m,
+                new Caliber(0.308, Units.Inches),
+                new RifleActionType("Bolt"),
                 22,
                 4),
             15);

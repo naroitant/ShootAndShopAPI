@@ -1,13 +1,20 @@
 ﻿namespace ShootAndShopAPI.Domain.Entities;
 
-public class Item(Product product, int quantity) : Product(
-    product.Sku, product.ManufacturerNumber, product.Name,
-    product.Manufacturer, product.Category)
+public class Item(
+    Product product, 
+    int quantity)
+    : Product(
+        product.Sku,
+        product.ManufacturerNumber,
+        product.Name,
+        product.Manufacturer,
+        product.PriceInUsd)
 {
-    public int Quantity { get; private set; } = quantity;
     public Product Product { get; private set; } = product;
+    public int ProductId { get; private set; }
+    public int Quantity { get; private set; } = quantity;
     
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj))
         {
@@ -24,7 +31,7 @@ public class Item(Product product, int quantity) : Product(
             return false;
         }
 
-        Item other = (Item) obj;
+        var other = (Item) obj;
 
         return Quantity.Equals(other.Quantity) &&
                Product.Equals(other.Product);

@@ -6,7 +6,7 @@ namespace ShootAndShopAPITest.Domain.Entities.UnitTests;
 public class OrderTests
 {
     [Fact]
-    public void ShouldCancelOrder()
+    public void ShouldCancel()
     {
         // Arrange
         var shoppingCart = new ShoppingCart(
@@ -28,11 +28,11 @@ public class OrderTests
         order.Cancel();
         
         // Assert
-        Assert.Equal(OrderStatus.Cancelled, order.Status);
+        Assert.Equal(OrderStatuses.Cancelled, order.Status);
     }
     
     [Fact]
-    public void ShouldPayOrder()
+    public void ShouldPay()
     {
         // Arrange
         var shoppingCart = new ShoppingCart(
@@ -54,6 +54,6 @@ public class OrderTests
         order.Pay();
         
         // Assert
-        Assert.Equal(OrderStatus.Paid, order.Status);
+        Assert.Equal(OrderStatuses.Paid, order.Status);
     }
 }

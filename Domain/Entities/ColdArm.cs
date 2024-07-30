@@ -1,31 +1,33 @@
 ﻿namespace ShootAndShopAPI.Domain.Entities;
 
-public class ColdArm(string sku, string manufacturerNumber, string name,
-    Manufacturer manufacturer, Category category, double bladeLengthInInches,
-    double overallLengthInInches, Material bladeMaterial,
-    Material handleMaterial) : Product(sku, manufacturerNumber, name,
-    manufacturer, category)
+public abstract class ColdArm(
+    string sku, 
+    string manufacturerNumber, 
+    string name,
+    Manufacturer manufacturer,
+    decimal priceInUsd,
+    double bladeLengthInInches,
+    double overallLengthInInches, 
+    Material bladeMaterial,
+    Material handleMaterial)
+    : Product(sku, manufacturerNumber, name, manufacturer, priceInUsd)
 {
-    public double BladeLengthInInches { get; private set; } =
+    public double BladeLengthInInches { get; protected set; } =
         bladeLengthInInches;
-    public double OverallLengthInInches { get; private set; } =
+    public double OverallLengthInInches { get; protected set; } =
         overallLengthInInches;
-    public Material BladeMaterial { get; private set; } = bladeMaterial;
-    public Material HandleMaterial { get; private set; } = handleMaterial;
+    public Material BladeMaterial { get; protected set; } = bladeMaterial;
+    public Material HandleMaterial { get; protected set; } = handleMaterial;
 
-    public void Change(string sku, string manufacturerNumber, string name,
-        Manufacturer manufacturer, Category category,
-        double bladeLengthInInches, double overallLengthInInches,
-        Material bladeMaterial, Material handleMaterial)
+    public void ChangeSpecs(
+        double newBladeLengthInInches,
+        double newOverallLengthInInches,
+        Material newBladeMaterial,
+        Material newHandleMaterial)
     {
-        Sku = sku;
-        ManufacturerNumber = manufacturerNumber;
-        Name = name;
-        Manufacturer = manufacturer;
-        Category = category;
-        BladeLengthInInches = bladeLengthInInches;
-        OverallLengthInInches = overallLengthInInches;
-        BladeMaterial = bladeMaterial;
-        HandleMaterial = handleMaterial;
+        BladeLengthInInches = newBladeLengthInInches;
+        OverallLengthInInches = newOverallLengthInInches;
+        BladeMaterial = newBladeMaterial;
+        HandleMaterial = newHandleMaterial;
     }
 }

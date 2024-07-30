@@ -1,7 +1,7 @@
 ﻿namespace ShootAndShopAPI.Domain.ValueObjects;
 
-public enum Unit
+public enum KnifeStyles
 {
-    Millimeters,
-    Inches,
+    Edc = 0,
+    Fixed = 1,
 }

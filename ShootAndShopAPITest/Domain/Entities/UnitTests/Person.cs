@@ -5,9 +5,13 @@ namespace ShootAndShopAPITest.Domain.Entities.UnitTests;
 
 public class PersonTests
 {
-    private class PersonTest(string firstName, string middleName, string lastName,
-        string phoneNumber, Address address) : Person(firstName, middleName,
-        lastName, phoneNumber, address) { }
+    private class PersonTest(
+        string firstName,
+        string middleName,
+        string lastName,
+        string phoneNumber,
+        Address address)
+        : Person(firstName, middleName, lastName, phoneNumber, address) { }
     
     [Fact]
     public void ShouldChangeAddress()

@@ -1,7 +1,11 @@
 ﻿namespace ShootAndShopAPI.Domain.ValueObjects;
 
-public class Address(string addressLine, string city, string state,
-    string country, string postalCode)
+public class Address(
+    string addressLine, 
+    string city, 
+    string state,
+    string country, 
+    string postalCode)
 {
     public string AddressLine { get; private set; } = addressLine;
     public string City { get; private set; } = city;

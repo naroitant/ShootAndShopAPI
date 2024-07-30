@@ -2,6 +2,13 @@
 
 namespace ShootAndShopAPI.Domain.Entities;
 
-public class Seller(string firstName, string middleName,
-    string lastName, string phoneNumber, Address address)
-    : Person(firstName, middleName, lastName, phoneNumber, address) { }
+public class Seller(
+    string firstName,
+    string middleName,
+    string lastName,
+    string phoneNumber,
+    Address address)
+    : Person(firstName, middleName, lastName, phoneNumber, address)
+{
+    public List<Payment> Payments { get; private set; } = [];
+}
