@@ -2,12 +2,19 @@
 
 namespace ShootAndShopAPI.Domain.Entities;
 
-public class Order(
-    ShoppingCart shoppingCart,
-    DateTimeOffset createdAt)
-    : Set(shoppingCart.Customer, shoppingCart.Items)
+public class Order : Set
 {
-    public DateTimeOffset CreatedAt { get; private set; } = createdAt;
+    private Order() : base() { }
+    
+    public Order(
+        ShoppingCart shoppingCart,
+        DateTimeOffset createdAt)
+        : base(shoppingCart.Customer, shoppingCart.Items)
+    {
+        CreatedAt = createdAt;
+    }
+
+    public DateTimeOffset CreatedAt { get; private set; }
     public OrderStatuses Status { get; private set; } = OrderStatuses.Active;
 
     public void Cancel()

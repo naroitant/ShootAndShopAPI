@@ -2,27 +2,36 @@
 
 namespace ShootAndShopAPI.Domain.Entities;
 
-public class Scope(
-    string sku,
-    string manufacturerNumber,
-    string name,
-    Manufacturer manufacturer,
-    decimal priceInUsd,
-    Product product,
-    int objectiveSizeInMillimeters,
-    int minMagnification,
-    int maxMagnification,
-    double eyeReliefInInches,
-    double fovInFeetAtZeroYards,
-    double fovInFeetAtOneHundredYards)
-    : Sight(sku, manufacturerNumber, name, manufacturer, priceInUsd, product,
-        objectiveSizeInMillimeters)
+public class Scope : Sight
 {
-    public MagnificationRange MagnificationRange { get; private set; } =
-        new(minMagnification, maxMagnification);
-    public double EyeReliefInInches { get; private set; } = eyeReliefInInches;
-    public FovRange FovRange { get; private set; } = 
-        new(fovInFeetAtZeroYards, fovInFeetAtOneHundredYards);
+    private Scope() : base() { }
+    
+    public Scope(
+        string sku,
+        string manufacturerNumber,
+        string name,
+        Manufacturer manufacturer,
+        decimal priceInUsd,
+        Product product,
+        int objectiveSizeInMillimeters,
+        int minMagnification,
+        int maxMagnification,
+        double eyeReliefInInches,
+        double fovInFeetAtZeroYards,
+        double fovInFeetAtOneHundredYards)
+        : base(sku, manufacturerNumber, name, manufacturer, priceInUsd,
+            product, objectiveSizeInMillimeters)
+    {
+        MagnificationRange = new MagnificationRange(minMagnification,
+            maxMagnification);
+        EyeReliefInInches = eyeReliefInInches;
+        FovRange = new FovRange(fovInFeetAtZeroYards,
+            fovInFeetAtOneHundredYards);
+    }
+
+    public MagnificationRange MagnificationRange { get; private set; }
+    public double EyeReliefInInches { get; private set; }
+    public FovRange FovRange { get; private set; }
     
     public void ChangeSpecs(
         int newObjectiveSizeInMillimeters,

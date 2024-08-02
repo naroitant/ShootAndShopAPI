@@ -1,7 +1,11 @@
 ﻿namespace ShootAndShopAPI.Domain.Entities;
 
-public class Manufacturer(string name) : Quality(name)
+public class Manufacturer : Quality
 {
+    private Manufacturer() : base() { }
+    
+    public Manufacturer(string name) : base(name) { }
+
     public List<Ammo> Ammos { get; private set; } = [];
     public List<Axe> Axes { get; private set; } = [];
     public List<Knife> Knives { get; private set; } = [];

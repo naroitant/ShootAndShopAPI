@@ -1,18 +1,22 @@
-﻿namespace ShootAndShopAPI.Domain.Entities;
+﻿using ShootAndShopAPI.Domain.Common;
 
-public class Item(
-    Product product, 
-    int quantity)
-    : Product(
-        product.Sku,
-        product.ManufacturerNumber,
-        product.Name,
-        product.Manufacturer,
-        product.PriceInUsd)
+namespace ShootAndShopAPI.Domain.Entities;
+
+public class Item : BaseEntity
 {
-    public Product Product { get; private set; } = product;
-    public int ProductId { get; private set; }
-    public int Quantity { get; private set; } = quantity;
+    private Item() : base() { }
+    
+    public Item(
+        Product product, 
+        int quantity)
+    {
+        Product = product;
+        Quantity = quantity;
+    }
+
+    public Product Product { get; private set; }
+    public Guid ProductId { get; private set; }
+    public int Quantity { get; private set; }
     
     public override bool Equals(object? obj)
     {

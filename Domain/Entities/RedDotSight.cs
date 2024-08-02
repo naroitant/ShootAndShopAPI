@@ -1,26 +1,28 @@
 ﻿namespace ShootAndShopAPI.Domain.Entities;
 
-public class RedDotSight(
-    string sku,
-    string manufacturerNumber,
-    string name,
-    Manufacturer manufacturer,
-    decimal priceInUsd,
-    Product product,
-    int objectiveSizeInMillimeters,
-    int magnification,
-    int dotSizeInMoa)
-    : Sight(
-        sku,
-        manufacturerNumber,
-        name,
-        manufacturer,
-        priceInUsd,
-        product,
-        objectiveSizeInMillimeters)
+public class RedDotSight : Sight
 {
-    public int Magnification { get; private set; } = magnification;
-    public int DotSizeInMoa { get; private set; } = dotSizeInMoa;
+    private RedDotSight() : base() { }
+    
+    public RedDotSight(
+        string sku,
+        string manufacturerNumber,
+        string name,
+        Manufacturer manufacturer,
+        decimal priceInUsd,
+        Product product,
+        int objectiveSizeInMillimeters,
+        int magnification,
+        int dotSizeInMoa)
+        : base(sku, manufacturerNumber, name, manufacturer, priceInUsd,
+            product, objectiveSizeInMillimeters)
+    {
+        Magnification = magnification;
+        DotSizeInMoa = dotSizeInMoa;
+    }
+
+    public int Magnification { get; private set; }
+    public int DotSizeInMoa { get; private set; }
     
     public void ChangeSpecs(
         int newObjectiveSizeInMillimeters,

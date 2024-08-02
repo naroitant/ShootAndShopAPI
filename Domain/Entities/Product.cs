@@ -2,21 +2,30 @@
 
 namespace ShootAndShopAPI.Domain.Entities;
 
-public abstract class Product(
-    string sku,
-    string manufacturerNumber,
-    string name,
-    Manufacturer manufacturer,
-    decimal priceInUsd)
-    : BaseEntity
+public abstract class Product : BaseEntity
 {
-    public string Sku { get; protected set; } = sku;
-    public string ManufacturerNumber { get; protected set; } =
-        manufacturerNumber;
-    public string Name { get; protected set; } = name;
-    public Manufacturer Manufacturer { get; protected set; } = manufacturer;
-    public int ManufacturerId { get; protected set; }
-    public decimal PriceInUsd { get; protected set; } = priceInUsd;
+    protected Product() { }
+    
+    protected Product(
+        string sku,
+        string manufacturerNumber,
+        string name,
+        Manufacturer manufacturer,
+        decimal priceInUsd)
+    {
+        Sku = sku;
+        ManufacturerNumber = manufacturerNumber;
+        Name = name;
+        Manufacturer = manufacturer;
+        PriceInUsd = priceInUsd;
+    }
+
+    public string Sku { get; protected set; }
+    public string ManufacturerNumber { get; protected set; }
+    public string Name { get; protected set; }
+    public Manufacturer Manufacturer { get; protected set; }
+    public Guid ManufacturerId { get; protected set; }
+    public decimal PriceInUsd { get; protected set; }
     public int QuantityInStock { get; private set; } = 0;
     public List<ProductPrice> PriceHistory { get; protected set; } = [];
     public List<Item> Items { get; protected set; } = [];

@@ -15,16 +15,9 @@ public class ColdArmTests
         double overallLengthInInches, 
         Material bladeMaterial,
         Material handleMaterial)
-        : ColdArm(
-            sku,
-            manufacturerNumber,
-            name,
-            manufacturer,
-            priceInUsd,
-            bladeLengthInInches,
-            overallLengthInInches, 
-            bladeMaterial,
-            handleMaterial) {}
+        : ColdArm(sku, manufacturerNumber, name, manufacturer, priceInUsd,
+            bladeLengthInInches, overallLengthInInches, bladeMaterial,
+            handleMaterial) { }
     
     [Fact]
     public void ShouldChangeSpecs()

@@ -1,3 +1,11 @@
-﻿namespace ShootAndShopAPI.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-public class Color(string name) : Quality(name) { }
+namespace ShootAndShopAPI.Domain.Entities;
+
+[Table("color")]
+public class Color : Quality
+{
+    private Color() : base() { }
+    
+    public Color(string name) : base(name) { }
+}

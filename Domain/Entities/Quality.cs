@@ -2,9 +2,16 @@
 
 namespace ShootAndShopAPI.Domain.Entities;
 
-public abstract class Quality(string name) : BaseEntity
+public abstract class Quality : BaseEntity
 {
-    public string Name { get; private set; } = name;
+    protected Quality() { }
+    
+    protected Quality(string name)
+    {
+        Name = name;
+    }
+
+    public string Name { get; private set; }
 
     public void ChangeName(string newName)
     {

@@ -2,12 +2,19 @@
 
 namespace ShootAndShopAPI.Domain.Entities;
 
-public class Payment(
-    DateTimeOffset paidAt, 
-    Seller seller)
-    : BaseEntity
+public class Payment : BaseEntity
 {
-    public DateTimeOffset PaidAt { get; private set; } = paidAt;
-    public Seller Seller { get; private set; } = seller;
-    public int SellerId { get; private set; }
+    private Payment() { }
+    
+    public Payment(
+        DateTimeOffset paidAt, 
+        Seller seller)
+    {
+        PaidAt = paidAt;
+        Seller = seller;
+    }
+
+    public DateTimeOffset PaidAt { get; private set; }
+    public Seller Seller { get; private set; }
+    public Guid SellerId { get; private set; }
 }

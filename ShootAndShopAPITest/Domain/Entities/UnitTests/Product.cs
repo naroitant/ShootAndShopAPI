@@ -11,12 +11,7 @@ public class ProductTests
         string name,
         Manufacturer manufacturer,
         decimal priceInUsd)
-        : Product(
-            sku,
-            manufacturerNumber,
-            name,
-            manufacturer,
-            priceInUsd) {}
+        : Product(sku, manufacturerNumber, name, manufacturer, priceInUsd) { }
     
     [Fact]
     public void ShouldChangeCommonInfo()

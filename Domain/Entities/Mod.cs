@@ -1,16 +1,22 @@
 ﻿namespace ShootAndShopAPI.Domain.Entities;
 
-public abstract class Mod(
-    string sku,
-    string manufacturerNumber,
-    string name,
-    Manufacturer manufacturer,
-    decimal priceInUsd,
-    Product? product)
-    : Product(sku, manufacturerNumber, name, manufacturer, priceInUsd)
+public abstract class Mod : Product
 {
-    public Product? Product { get; private set; } = product;
-    public int ProductId { get; private set; }
+    protected Mod() : base() { }
+    
+    protected Mod(string sku,
+        string manufacturerNumber,
+        string name,
+        Manufacturer manufacturer,
+        decimal priceInUsd,
+        Product? product)
+        : base(sku, manufacturerNumber, name, manufacturer, priceInUsd)
+    {
+        Product = product;
+    }
+
+    public Product? Product { get; private set; }
+    public Guid ProductId { get; private set; }
     public List<Product> CompatibleProducts { get; private set; } = [];
 
     public void AddCompatibleProduct(Product newCompatibleProduct)

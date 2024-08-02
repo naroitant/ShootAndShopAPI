@@ -3,19 +3,29 @@ using ShootAndShopAPI.Domain.ValueObjects;
 
 namespace ShootAndShopAPI.Domain.Entities;
 
-public abstract class Person(
-    string firstName, 
-    string middleName,
-    string lastName, 
-    string phoneNumber, 
-    Address address)
-    : BaseEntity
+public abstract class Person : BaseEntity
 {
-    public string FirstName { get; private set; } = firstName;
-    public string MiddleName { get; private set; } = middleName;
-    public string LastName { get; private set; } = lastName;
-    public string PhoneNumber { get; private set; } = phoneNumber;
-    public Address Address { get; private set; } = address;
+    protected Person() { }
+    
+    protected Person(
+        string firstName, 
+        string middleName,
+        string lastName, 
+        string phoneNumber, 
+        Address address)
+    {
+        FirstName = firstName;
+        MiddleName = middleName;
+        LastName = lastName;
+        PhoneNumber = phoneNumber;
+        Address = address;
+    }
+
+    public string FirstName { get; private set; }
+    public string MiddleName { get; private set; }
+    public string LastName { get; private set; }
+    public string PhoneNumber { get; private set; }
+    public Address Address { get; private set; }
 
     public void ChangeAddress(Address newAddress)
     {

@@ -5,22 +5,6 @@ namespace ShootAndShopAPITest.Domain.Entities.UnitTests;
 
 public class ModTests
 {
-    public class ModTest(
-        string sku,
-        string manufacturerNumber,
-        string name,
-        Manufacturer manufacturer,
-        decimal priceInUsd,
-        Product product)
-        : Mod(
-            sku,
-            manufacturerNumber,
-            name,
-            manufacturer,
-            priceInUsd,
-            product
-        );
-    
     [Fact]
     public void ShouldAddCompatibleProduct()
     {

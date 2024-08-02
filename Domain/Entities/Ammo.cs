@@ -1,19 +1,28 @@
 ﻿namespace ShootAndShopAPI.Domain.Entities;
 
-public class Ammo(
-    string sku,
-    string manufacturerNumber, 
-    string name, 
-    Manufacturer manufacturer,
-    decimal priceInUsd,
-    int roundsPerBox, 
-    double weightInGrains,
-    double velocityInFps)
-    : Product(sku, manufacturerNumber, name, manufacturer, priceInUsd)
+public class Ammo : Product
 {
-    public int RoundsPerBox { get; private set; } = roundsPerBox;
-    public double WeightInGrains { get; private set; } = weightInGrains;
-    public double VelocityInFps { get; private set; } = velocityInFps;
+    private Ammo() : base() { }
+    
+    public Ammo(
+        string sku,
+        string manufacturerNumber, 
+        string name, 
+        Manufacturer manufacturer,
+        decimal priceInUsd,
+        int roundsPerBox, 
+        double weightInGrains,
+        double velocityInFps)
+        : base(sku, manufacturerNumber, name, manufacturer, priceInUsd)
+    {
+        RoundsPerBox = roundsPerBox;
+        WeightInGrains = weightInGrains;
+        VelocityInFps = velocityInFps;
+    }
+
+    public int RoundsPerBox { get; private set; }
+    public double WeightInGrains { get; private set; }
+    public double VelocityInFps { get; private set; }
     
     public void ChangeSpecs(
         int roundsPerBox, 

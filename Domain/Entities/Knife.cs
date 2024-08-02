@@ -2,20 +2,22 @@
 
 namespace ShootAndShopAPI.Domain.Entities;
 
-public class Knife(
-    string sku, 
-    string manufacturerNumber, 
-    string name,
-    Manufacturer manufacturer,
-    decimal priceInUsd,
-    double bladeLengthInInches,
-    double overallLengthInInches, 
-    Material bladeMaterial,
-    Material handleMaterial,
-    KnifeStyles knifeStyle,
-    BladeStyles bladeStyle)
-    : ColdArm(
-        sku, 
+public class Knife : ColdArm
+{
+    private Knife() : base() { }
+    
+    public Knife(
+        string sku, 
+        string manufacturerNumber, 
+        string name,
+        Manufacturer manufacturer,
+        decimal priceInUsd,
+        double bladeLengthInInches,
+        double overallLengthInInches, 
+        Material bladeMaterial,
+        Material handleMaterial,
+        KnifeStyles knifeStyle,
+        BladeStyles bladeStyle) : base(sku, 
         manufacturerNumber, 
         name,
         manufacturer,
@@ -24,9 +26,13 @@ public class Knife(
         overallLengthInInches, 
         bladeMaterial,
         handleMaterial)
-{
-    public KnifeStyles KnifeStyle { get; private set; } = knifeStyle;
-    public BladeStyles BladeStyle { get; private set; } = bladeStyle;
+    {
+        KnifeStyle = knifeStyle;
+        BladeStyle = bladeStyle;
+    }
+
+    public KnifeStyles KnifeStyle { get; private set; }
+    public BladeStyles BladeStyle { get; private set; }
 
     public void ChangeSpecs(
         double newBladeLengthInInches,

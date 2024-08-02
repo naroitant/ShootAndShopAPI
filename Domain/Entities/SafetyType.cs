@@ -1,3 +1,8 @@
 ﻿namespace ShootAndShopAPI.Domain.Entities;
 
-public class SafetyType(string name) : Quality(name) { }
+public class SafetyType : Quality
+{
+    private SafetyType() { }
+    
+    public SafetyType(string name) : base(name) { }
+}

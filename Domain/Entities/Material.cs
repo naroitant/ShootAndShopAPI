@@ -1,5 +1,8 @@
-﻿using ShootAndShopAPI.Domain.Common;
+﻿namespace ShootAndShopAPI.Domain.Entities;
 
-namespace ShootAndShopAPI.Domain.Entities;
-
-public class Material(string name) : Quality(name) { }
+public class Material : Quality
+{
+    private Material() : base() { }
+    
+    public Material(string name) : base(name) { }
+}

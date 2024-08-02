@@ -6,26 +6,18 @@ namespace ShootAndShopAPITest.Domain.Entities.UnitTests;
 
 public class FireArmTests
 {
-    public class FireArmTest(
+    private class FireArmTest(
         string sku,
         string manufacturerNumber,
         string name,
         Manufacturer manufacturer,
         decimal priceInUsd,
         Caliber caliber,
-        ActionType actionType,
         double barrelLengthInInches,
         int capacityWithoutChamber)
-        : FireArm(
-            sku,
-            manufacturerNumber,
-            name,
-            manufacturer,
-            priceInUsd,
-            caliber,
-            actionType,
-            barrelLengthInInches,
-            capacityWithoutChamber) { }
+        : FireArm(sku, manufacturerNumber, name, manufacturer, priceInUsd,
+            caliber, barrelLengthInInches, capacityWithoutChamber) { }
+    
     [Fact]
     public void ShouldChangeSpecs()
     {
@@ -37,14 +29,12 @@ public class FireArmTests
             new Manufacturer("Ruger"),
             799.00m,
             new Caliber(9, Units.Millimeters),
-            new RifleActionType("Semi-Auto"),
             16.1,
             17);
         
         // Act
         fireArm.ChangeSpecs(
             new Caliber(0.308, Units.Inches),
-            new RifleActionType("Bolt"),
             22,
             4);
         
@@ -57,7 +47,6 @@ public class FireArmTests
                 new Manufacturer("Ruger"),
                 799.00m,
                 new Caliber(0.308, Units.Inches),
-                new RifleActionType("Bolt"),
                 22,
                 4)),
             JsonConvert.SerializeObject(fireArm));
