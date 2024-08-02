@@ -70,25 +70,20 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<Guid?>("ShoppingCartId")
+                    b.Property<Guid>("SetId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
-
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("ShoppingCartId");
+                    b.HasIndex("SetId");
 
                     b.ToTable("item", (string)null);
                 });
@@ -136,29 +131,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("material", (string)null);
-                });
-
-            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Order", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("order", (string)null);
                 });
 
             modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Payment", b =>
@@ -315,7 +287,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("seller", (string)null);
                 });
 
-            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.ShoppingCart", b =>
+            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Set", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -324,12 +296,18 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("character varying(13)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId")
-                        .IsUnique();
+                    b.ToTable("set", (string)null);
 
-                    b.ToTable("shopping_cart", (string)null);
+                    b.HasDiscriminator().HasValue("Set");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.ShotgunActionType", b =>
@@ -519,6 +497,33 @@ namespace Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("Scope");
                 });
 
+            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Order", b =>
+                {
+                    b.HasBaseType("ShootAndShopAPI.Domain.Entities.Set");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasDiscriminator().HasValue("Order");
+                });
+
+            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.ShoppingCart", b =>
+                {
+                    b.HasBaseType("ShootAndShopAPI.Domain.Entities.Set");
+
+                    b.HasIndex("CustomerId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_set_CustomerId1");
+
+                    b.HasDiscriminator().HasValue("ShoppingCart");
+                });
+
             modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Rifle", b =>
                 {
                     b.HasBaseType("ShootAndShopAPI.Domain.Entities.FireArm");
@@ -588,32 +593,21 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Item", b =>
                 {
-                    b.HasOne("ShootAndShopAPI.Domain.Entities.Order", null)
-                        .WithMany("Items")
-                        .HasForeignKey("OrderId");
-
                     b.HasOne("ShootAndShopAPI.Domain.Entities.Product", "Product")
                         .WithMany("Items")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShootAndShopAPI.Domain.Entities.ShoppingCart", null)
+                    b.HasOne("ShootAndShopAPI.Domain.Entities.Set", "Set")
                         .WithMany("Items")
-                        .HasForeignKey("ShoppingCartId");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Order", b =>
-                {
-                    b.HasOne("ShootAndShopAPI.Domain.Entities.Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("SetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("Product");
+
+                    b.Navigation("Set");
                 });
 
             modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Payment", b =>
@@ -690,17 +684,6 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("Address")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.ShoppingCart", b =>
-                {
-                    b.HasOne("ShootAndShopAPI.Domain.Entities.Customer", "Customer")
-                        .WithOne("ShoppingCart")
-                        .HasForeignKey("ShootAndShopAPI.Domain.Entities.ShoppingCart", "CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Ammo", b =>
@@ -902,6 +885,29 @@ namespace Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Order", b =>
+                {
+                    b.HasOne("ShootAndShopAPI.Domain.Entities.Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.ShoppingCart", b =>
+                {
+                    b.HasOne("ShootAndShopAPI.Domain.Entities.Customer", "Customer")
+                        .WithOne("ShoppingCart")
+                        .HasForeignKey("ShootAndShopAPI.Domain.Entities.ShoppingCart", "CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_set_customer_CustomerId1");
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Rifle", b =>
                 {
                     b.HasOne("ShootAndShopAPI.Domain.Entities.Manufacturer", "Manufacturer")
@@ -944,7 +950,8 @@ namespace Infrastructure.Migrations
                 {
                     b.Navigation("Orders");
 
-                    b.Navigation("ShoppingCart");
+                    b.Navigation("ShoppingCart")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Manufacturer", b =>
@@ -966,11 +973,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Shotguns");
                 });
 
-            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Order", b =>
-                {
-                    b.Navigation("Items");
-                });
-
             modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Product", b =>
                 {
                     b.Navigation("Items");
@@ -988,7 +990,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Payments");
                 });
 
-            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.ShoppingCart", b =>
+            modelBuilder.Entity("ShootAndShopAPI.Domain.Entities.Set", b =>
                 {
                     b.Navigation("Items");
                 });

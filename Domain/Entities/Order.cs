@@ -6,12 +6,18 @@ public class Order : Set
 {
     private Order() : base() { }
     
-    public Order(
-        ShoppingCart shoppingCart,
-        DateTimeOffset createdAt)
-        : base(shoppingCart.Customer, shoppingCart.Items)
+    public Order(ShoppingCart shoppingCart) : base(shoppingCart.Customer)
     {
-        CreatedAt = createdAt;
+        foreach (var item in shoppingCart.Items.Select(shoppingCartItem => 
+            new Item(
+                this, 
+                shoppingCartItem.Product, 
+                shoppingCartItem.Quantity)))
+        {
+            Items.Add(item);
+        }
+
+        CreatedAt = DateTimeOffset.Now;
     }
 
     public DateTimeOffset CreatedAt { get; private set; }

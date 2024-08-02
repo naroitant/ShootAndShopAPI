@@ -5,7 +5,7 @@ namespace ShootAndShopAPITest.Domain.Entities.UnitTests;
 
 public class ColdArmTests
 {
-    public class ColdArmTest(
+    private class ColdArmTest(
         string sku, 
         string manufacturerNumber, 
         string name,

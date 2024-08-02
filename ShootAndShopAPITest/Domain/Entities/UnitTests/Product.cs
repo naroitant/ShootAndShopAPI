@@ -79,9 +79,7 @@ public class ProductTests
         product.Receive(10);
         
         // Assert
-        Assert.Equal(
-            10,
-            product.QuantityInStock);
+        Assert.Equal(10, product.QuantityInStock);
     }
     
     [Fact]
@@ -99,8 +97,6 @@ public class ProductTests
         product.Spend(10);
         
         // Assert
-        Assert.Equal(
-            0,
-            product.QuantityInStock);
+        Assert.Equal(0, product.QuantityInStock);
     }
 }

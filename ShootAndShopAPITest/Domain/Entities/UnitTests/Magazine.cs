@@ -10,29 +10,28 @@ public class MagazineTests
     public void ShouldChangeSpecs()
     {
         // Arrange
+        var rifle = new Rifle(
+            "535711233",
+            "048702007125",
+            "Winchester XPR Suppressor-Ready Bolt-Action Centerfire Rifle",
+            new Manufacturer("Winchester"),
+            649.99m,
+            new Caliber(0.3, Units.Inches),
+            new RifleActionType("Bolt-Action"),
+            20.0,
+            3);
         var magazine = new Magazine(
             "3271220",
             "VTCF231011SW",
             "Vortex Crossfire II 3-9x50 Straight-Wall Rifle Scope",
             new Manufacturer(name: "Vortex"),
             169.99m,
-            new Rifle(
-                "535711233",
-                "048702007125",
-                "Winchester XPR Suppressor-Ready Bolt-Action Centerfire Rifle",
-                new Manufacturer("Winchester"),
-                649.99m,
-                new Caliber(0.3, Units.Inches),
-                new RifleActionType("Bolt-Action"),
-                20.0,
-                3),
+            rifle,
             30,
             new Material("Polymer"));
         
         // Act
-        magazine.ChangeSpecs(
-            45,
-            new Material("Nylon"));
+        magazine.ChangeSpecs(45, new Material("Nylon"));
         
         // Assert
         Assert.Equal(
@@ -42,16 +41,7 @@ public class MagazineTests
                     "Vortex Crossfire II 3-9x50 Straight-Wall Rifle Scope",
                     new Manufacturer(name: "Vortex"),
                     169.99m,
-                    new Rifle(
-                        "535711233",
-                        "048702007125",
-                        "Winchester XPR Suppressor-Ready Bolt-Action Centerfire Rifle",
-                        new Manufacturer("Winchester"),
-                        649.99m,
-                        new Caliber(0.3, Units.Inches),
-                        new RifleActionType("Bolt-Action"),
-                        20.0,
-                        3),
+                    rifle,
                     45,
                     new Material("Nylon"))),
             JsonConvert.SerializeObject(magazine));
