@@ -1,12 +1,12 @@
-using ShootAndShopAPI.Domain.Entities;
+﻿using ShootAndShopAPI.Domain.Entities;
 using ShootAndShopAPI.Domain.ValueObjects;
 
 namespace ShootAndShopAPITest.Domain.Entities.UnitTests;
 
-public class OrderTests
+public class SetTests
 {
     [Fact]
-    public void ShouldCancel()
+    public void ShouldGetTotalCost()
     {
         // Arrange
         var customer = new Customer(
@@ -20,7 +20,15 @@ public class OrderTests
                 "New York",
                 "United States",
                 "10000"));
-        var shoppingCart = new ShoppingCart(customer);
+        var ammo = new Ammo(
+            "757750308152",
+            "DPX762X39123",
+            "Cor Bon Hunter 7.62x39mm, 123 gr, Deep Penetrating, 20rd Box",
+            new Manufacturer(name: "Con-Bon"),
+            37.99m,
+            25,
+            124,
+            1110);
         var rifle = new Rifle(
             "736676169344",
             "16934",
@@ -31,38 +39,14 @@ public class OrderTests
             new RifleActionType("Bolt"),
             22,
             4);
-        shoppingCart.AddItem(rifle);
-        var order = shoppingCart.Checkout();
-        
-        // Act
-        order.Cancel();
-        
-        // Assert
-        Assert.Equal(OrderStatuses.Cancelled, order.Status);
-    }
-    
-    [Fact]
-    public void ShouldPay()
-    {
-        // Arrange
-        var customer = new Customer(
-            "Jake",
-            "Travis",
-            "Amundsen",
-            "+18002002010",
-            new Address(
-                "123 Washington Street, apt 1",
-                "New York",
-                "New York",
-                "United States",
-                "10000"));
         var shoppingCart = new ShoppingCart(customer);
-        var order = new Order(shoppingCart);
+        shoppingCart.AddItem(ammo);
+        shoppingCart.AddItem(rifle);
         
         // Act
-        order.Pay();
-        
+        var totalCostInUsd = shoppingCart.GetTotalCostInUsd();
+
         // Assert
-        Assert.Equal(OrderStatuses.Paid, order.Status);
+        Assert.Equal(836.99m, totalCostInUsd);
     }
 }

@@ -15,5 +15,5 @@ public class Customer : Person
         : base(firstName, middleName, lastName, phoneNumber, address) { }
 
     public List<Order> Orders { get; private set; } = [];
-    public ShoppingCart? ShoppingCart { get; private set; }
+    public ShoppingCart ShoppingCart { get; private set; }
 }

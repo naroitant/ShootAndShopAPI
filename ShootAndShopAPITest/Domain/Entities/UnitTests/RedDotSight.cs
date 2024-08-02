@@ -10,31 +10,29 @@ public class RedDotSightTests
     public void ShouldChangeSpecs()
     {
         // Arrange
+        var rifle = new Rifle(
+            "1702743",
+            "682146830750",
+            "Citadel Levtac-92 Rifle 44 Mag. 18 in. M-Lok Black RH",
+            new Manufacturer(name: "Citadel"),
+            799.00m,
+            new Caliber(0.44, Units.Inches),
+            new RifleActionType("Lever-Action"),
+            16.5,
+            8);
         var redDotSight = new RedDotSight(
             "3620061",
             "798681684274",
             "Sig Sauer Romeo5X Gen II Red-Dot Sight",
             new Manufacturer(name: "Sig Sauer"),
             149.99m,
-            new Rifle(
-                "1702743",
-                "682146830750",
-                "Citadel Levtac-92 Rifle 44 Mag. 18 in. M-Lok Black RH",
-                new Manufacturer(name: "Citadel"),
-                799.00m,
-                new Caliber(0.44, Units.Inches),
-                new RifleActionType("Lever-Action"),
-                16.5,
-                8),
+            rifle,
             20,
             1,
             2);
         
         // Act
-        redDotSight.ChangeSpecs(
-            25,
-            2,
-            1);
+        redDotSight.ChangeSpecs(25, 2, 1);
         
         // Assert
         Assert.Equal(
@@ -44,16 +42,7 @@ public class RedDotSightTests
                 "Sig Sauer Romeo5X Gen II Red-Dot Sight",
                 new Manufacturer(name: "Sig Sauer"),
                 149.99m,
-                new Rifle(
-                    "1702743",
-                    "682146830750",
-                    "Citadel Levtac-92 Rifle 44 Mag. 18 in. M-Lok Black RH",
-                    new Manufacturer(name: "Citadel"),
-                    799.00m,
-                    new Caliber(0.44, Units.Inches),
-                    new RifleActionType("Lever-Action"),
-                    16.5,
-                    8),
+                rifle,
                 25,
                 2,
                 1)),

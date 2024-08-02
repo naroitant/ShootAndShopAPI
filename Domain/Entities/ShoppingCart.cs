@@ -4,16 +4,14 @@ public class ShoppingCart : Set
 {
     private ShoppingCart() : base() { }
     
-    public ShoppingCart(
-        Customer customer,
-        List<Item> items) : base(customer, [])
+    public ShoppingCart(Customer customer) : base(customer)
     {
         Customer = customer;
     }
     
     public void AddItem(Product product)
     {
-        var item = new Item(product, 1);
+        var item = new Item(this, product, 1);
         Items.Add(item);
     }
     
@@ -27,15 +25,15 @@ public class ShoppingCart : Set
         Items.Clear();
     }
     
-    public void Checkout()
+    public Order Checkout()
     {
-        if (Items.Count != 0)
-        {
-            var order = new Order(this, DateTimeOffset.Now);
-        }
-        else
+        if (Items.Count == 0)
         {
             throw new Exception();
         }
+        
+        var order = new Order(this);
+        Items.Clear();
+        return order;
     }
 }

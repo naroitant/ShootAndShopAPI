@@ -11,13 +11,12 @@ public interface IAppDbContext
     DbSet<LockType> LockTypes { get; }
     DbSet<Manufacturer> Manufacturers { get; }
     DbSet<Material> Materials { get; }
-    DbSet<Order> Orders { get; }
     DbSet<Payment> Payments { get; }
     DbSet<Product> Products { get; }
     DbSet<ProductPrice> ProductPrices { get; }
     DbSet<RifleActionType> RifleActionTypes { get; }
     DbSet<SafetyType> SafetyTypes { get; }
     DbSet<Seller> Sellers { get; }
-    DbSet<ShoppingCart> ShoppingCarts { get; }
+    DbSet<Set> Sets { get; }
     DbSet<ShotgunActionType> ShotgunActionTypes { get; }
 }

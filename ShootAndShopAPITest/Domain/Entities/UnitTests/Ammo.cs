@@ -57,9 +57,7 @@ public class AmmoTests
         ammo.Receive(10);
         
         // Assert
-        Assert.Equal(
-            10,
-            ammo.QuantityInStock);
+        Assert.Equal(10, ammo.QuantityInStock);
     }
     
     [Fact]
@@ -81,9 +79,7 @@ public class AmmoTests
         ammo.Spend(5);
         
         // Assert
-        Assert.Equal(
-            5,
-            ammo.QuantityInStock);
+        Assert.Equal(5, ammo.QuantityInStock);
     }
     
     [Fact]
@@ -101,7 +97,7 @@ public class AmmoTests
             2300);
         
         // Act
-        var exception = Record.Exception(() => ammo.Spend(5)); 
+        var exception = Record.Exception(() => ammo.Spend(5));
         
         // Assert
         Assert.IsType<Exception>(exception);

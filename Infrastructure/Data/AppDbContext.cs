@@ -15,14 +15,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
     public DbSet<LockType> LockTypes => Set<LockType>();
     public DbSet<Manufacturer> Manufacturers => Set<Manufacturer>();
     public DbSet<Material> Materials => Set<Material>();
-    public DbSet<Order> Orders => Set<Order>();
     public DbSet<Payment> Payments => Set<Payment>();
     public DbSet<Product> Products => Set<Product>();
     public DbSet<ProductPrice> ProductPrices => Set<ProductPrice>();
     public DbSet<RifleActionType> RifleActionTypes => Set<RifleActionType>();
     public DbSet<SafetyType> SafetyTypes => Set<SafetyType>();
     public DbSet<Seller> Sellers => Set<Seller>();
-    public DbSet<ShoppingCart> ShoppingCarts => Set<ShoppingCart>();
+    public DbSet<Set> Sets => Set<Set>();
     public DbSet<ShotgunActionType> ShotgunActionTypes =>
         Set<ShotgunActionType>();
 
@@ -110,7 +109,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
 
         builder
             .Entity<Order>()
-            .ToTable("order")
             .HasOne(o => o.Customer)
             .WithMany(c => c.Orders)
             .HasForeignKey(o => o.CustomerId);
@@ -193,10 +191,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
                 a.Property(p => p.Country);
                 a.Property(p => p.PostalCode);
             });
-        
+
+        builder
+            .Entity<Set>()
+            .ToTable("set");
+            
         builder
             .Entity<ShoppingCart>()
-            .ToTable("shopping_cart")
             .HasOne(s => s.Customer)
             .WithOne(c => c.ShoppingCart)
             .HasForeignKey<ShoppingCart>(s => s.CustomerId);
